@@ -1,7 +1,7 @@
 module_mitmf
 ===============
 
-FruityWifi MITMf module.
+BlackBulb MITMf module.
 
 
 v1.0

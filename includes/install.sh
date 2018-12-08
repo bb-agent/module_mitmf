@@ -25,9 +25,9 @@ unzip MITMf-master.zip
 
 chmod 755 ./mitmf
 
-mv /usr/share/fruitywifi/www/modules/mitmf/includes/MITMf-master/libs/bdfactory /usr/share/fruitywifi/www/modules/mitmf/includes/MITMf-master/libs/bdfactory.OLD
+mv /usr/share/blackbulb/www/modules/mitmf/includes/MITMf-master/libs/bdfactory /usr/share/blackbulb/www/modules/mitmf/includes/MITMf-master/libs/bdfactory.OLD
 
-ln -s /usr/share/fruitywifi/www/modules/bdfproxy/includes/bdf-proxy/bdf/ /usr/share/fruitywifi/www/modules/mitmf/includes/MITMf-master/libs/bdfactory
+ln -s /usr/share/blackbulb/www/modules/bdfproxy/includes/bdf-proxy/bdf/ /usr/share/blackbulb/www/modules/mitmf/includes/MITMf-master/libs/bdfactory
 
 sed -i 's/port.*=.*53.*# Port to listen on/port     = 5300       # Port to listen on/' MITMf-master/config/mitmf.conf
 

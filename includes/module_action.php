@@ -41,16 +41,16 @@ if($service != "") {
     if ($action == "start") {
         // COPY LOG
 		$exec = "$bin_mv $mod_logs $mod_logs_history/".gmdate("Ymd-H-i-s").".log";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
         
         $exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		//$exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-port 10000";
-		//exec_fruitywifi($exec);
+		//exec_blackbulb($exec);
 		
 		$exec = "$bin_iptables -t nat -A PREROUTING -p tcp --destination-port 53 -j REDIRECT --to-port 5300";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		// ADD selected options
         $tmp = array_keys($opt_value);
@@ -69,23 +69,23 @@ if($service != "") {
 		
 		//$io_action = "eth0";
 		$exec = "./mitmf $io_action $options > /dev/null &";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 	
     } else if($action == "stop") {
     	$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 80 -j REDIRECT --to-port 10000";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		//$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 443 -j REDIRECT --to-port 10000";
-		//exec_fruitywifi($exec);
+		//exec_blackbulb($exec);
 		
 		$exec = "$bin_iptables -t nat -D PREROUTING -p tcp --destination-port 53 -j REDIRECT --to-port 5300";
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
 		
 		$exec = "ps aux|grep -E 'python mitmf.py' | grep -v grep | awk '{print $2}'";
 		exec($exec,$output);
 		
 		$exec = "kill " . $output[0];
-		exec_fruitywifi($exec);
+		exec_blackbulb($exec);
     }
 }
 
@@ -93,10 +93,10 @@ if($service != "") {
 if ($install == "install_$mod_name") {
 
     $exec = "chmod 755 install.sh";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 
     $exec = "$bin_sudo ./install.sh > $log_path/install.txt &";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
     
     header('Location: ../../install.php?module='.$mod_name);
     exit;

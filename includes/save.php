@@ -35,10 +35,10 @@ if ($type == "opt_value") {
     for ($i=0; $i< count($tmp); $i++) {
         
         $exec = "/bin/sed -i 's/opt_value\\[\\\"".$tmp[$i]."\\\"\\]\\[0\\].*/opt_value\\[\\\"".$tmp[$i]."\\\"\\]\\[0\\] = 0;/g' options_config.php";
-        $output = exec_fruitywifi($exec);
+        $output = exec_blackbulb($exec);
         
         $exec = "/bin/sed -i 's/^".$tmp[$i].".*/".$tmp[$i]." = Off/g' Responder-master/Responder.conf";
-        //$output = exec_fruitywifi($exec);
+        //$output = exec_blackbulb($exec);
         
     }
 	
@@ -47,10 +47,10 @@ if ($type == "opt_value") {
         
         $exec = "/bin/sed -i 's/opt_value\\[\\\"".$tmp[$i]."\\\"\\]\\[0\\].*/opt_value\\[\\\"".$tmp[$i]."\\\"\\]\\[0\\] = 1;/g' options_config.php";
 		//echo $exec . "<br>";
-        $output = exec_fruitywifi($exec);
+        $output = exec_blackbulb($exec);
         
         $exec = "/bin/sed -i 's/^".$tmp[$i].".*/".$tmp[$i]." = On/g' Responder-master/Responder.conf";
-        //exec_fruitywifi($exec);
+        //exec_blackbulb($exec);
         
     }
 
@@ -63,10 +63,10 @@ if ($type == "config") {
 
     if ($newdata != "") { $newdata = ereg_replace(13,  "", $newdata);
         $exec = "$bin_echo '$newdata' | base64 --decode > $mod_path/includes/MITMf/config/mitmf.conf";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_dos2unix $mod_path/includes/MITMf/config/mitmf.conf";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
     }
 
     header('Location: ../index.php?tab=3');
@@ -78,10 +78,10 @@ if ($type == "inject") {
 
     if ($newdata != "") { $newdata = ereg_replace(13,  "", $newdata);
         $exec = "$bin_echo '$newdata' | base64 --decode > $mod_path/includes/inject.txt";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
         
         $exec = "$bin_dos2unix $mod_path/includes/inject.txt";
-        exec_fruitywifi($exec);
+        exec_blackbulb($exec);
     }
 
     header('Location: ../index.php?tab=4');
@@ -97,10 +97,10 @@ if ($type == "templates") {
 			if ($newdata != "") { $newdata = ereg_replace(13,  "", $newdata);
 				$template_path = "$mod_path/includes/MITMf/config/app_cache_poison_templates";
         		$exec = "$bin_echo '$newdata' | base64 --decode > $template_path/$tempname";
-                exec_fruitywifi($exec);
+                exec_blackbulb($exec);
                 
                 $exec = "$bin_dos2unix $template_path/$tempname";
-                exec_fruitywifi($exec);
+                exec_blackbulb($exec);
                 
     		}
     	}
@@ -113,7 +113,7 @@ if ($type == "templates") {
 				$template_path = "$mod_path/includes/MITMf/config/app_cache_poison_templates";
 				$exec = "$bin_touch $template_path/$new_rename_file";
 				//exec("$bin_danger \"$exec\"", $output); //DEPRECATED
-                exec_fruitywifi($exec);
+                exec_blackbulb($exec);
 
 				$tempname=$new_rename_file;
 			}
@@ -122,7 +122,7 @@ if ($type == "templates") {
 			$template_path = "$mod_path/includes/MITMf/config/app_cache_poison_templates";
 			$exec = "$bin_mv $template_path/$new_rename $template_path/$new_rename_file";
 			//exec("$bin_danger \"$exec\"", $output); //DEPRECATED
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
 
 			$tempname=$new_rename_file;
 		}
@@ -133,7 +133,7 @@ if ($type == "templates") {
 			$template_path = "$mod_path/includes/MITMf/config/app_cache_poison_templates";
 			$exec = "$bin_rm $template_path/$new_rename";
 			//exec("$bin_danger \"$exec\"", $output); //DEPRECATED
-            exec_fruitywifi($exec);
+            exec_blackbulb($exec);
 		}
 	}
 	header("Location: ../index.php?tab=5&tempname=$tempname");
@@ -148,10 +148,10 @@ if ($type == "filters") {
 			if ($newdata != "") { $newdata = ereg_replace(13,  "", $newdata);
 				$template_path = "$mod_path/includes/filters/resources/";
         		$exec = "$bin_echo '$newdata' | base64 --decode > $template_path/$tempname";
-                exec_fruitywifi($exec);
+                exec_blackbulb($exec);
                 
                 $exec = "$bin_dos2unix $template_path/$tempname";
-                exec_fruitywifi($exec);
+                exec_blackbulb($exec);
     		}
     	}
     	
@@ -162,7 +162,7 @@ if ($type == "filters") {
 
 if($mod_service == "mod_sslstrip_filter") {
     $exec = "$bin_sed -i 's/mod_sslstrip_filter=.*/mod_sslstrip_filter=\\\"".$mod_action."\\\";/g' ../_info_.php";
-    exec_fruitywifi($exec);
+    exec_blackbulb($exec);
 }
 
 header('Location: ../index.php');
